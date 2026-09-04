@@ -136,7 +136,7 @@ class QueryAntcloudMarketingagentCreativeResultResponse extends Model {
 
     // 当前会话的 Credit 计费总数
     /**
-     * @var int
+     * @var string
      */
     public $totalCredit;
 
