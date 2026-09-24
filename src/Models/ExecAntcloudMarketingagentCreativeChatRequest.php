@@ -61,7 +61,13 @@ class ExecAntcloudMarketingagentCreativeChatRequest extends Model {
             $res['height'] = $this->height;
         }
         if (null !== $this->extraParams) {
-            $res['extra_params'] = null !== $this->extraParams ? $this->extraParams->toMap() : null;
+            $res['extra_params'] = [];
+            if(null !== $this->extraParams && is_array($this->extraParams)){
+                $n = 0;
+                foreach($this->extraParams as $item){
+                    $res['extra_params'][$n++] = null !== $item ? $item->toMap() : $item;
+                }
+            }
         }
         return $res;
     }
@@ -105,7 +111,13 @@ class ExecAntcloudMarketingagentCreativeChatRequest extends Model {
             $model->height = $map['height'];
         }
         if(isset($map['extra_params'])){
-            $model->extraParams = MapStruct::fromMap($map['extra_params']);
+            if(!empty($map['extra_params'])){
+                $model->extraParams = [];
+                $n = 0;
+                foreach($map['extra_params'] as $item) {
+                    $model->extraParams[$n++] = null !== $item ? MapStruct::fromMap($item) : $item;
+                }
+            }
         }
         return $model;
     }
@@ -165,7 +177,7 @@ class ExecAntcloudMarketingagentCreativeChatRequest extends Model {
 
     // 额外参数
     /**
-     * @var MapStruct
+     * @var MapStruct[]
      */
     public $extraParams;
 
