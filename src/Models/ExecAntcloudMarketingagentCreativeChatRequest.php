@@ -21,6 +21,7 @@ class ExecAntcloudMarketingagentCreativeChatRequest extends Model {
         'width' => 'width',
         'height' => 'height',
         'extraParams' => 'extra_params',
+        'productCode' => 'product_code',
     ];
     public function validate() {
         Model::validateRequired('prompt', $this->prompt, true);
@@ -68,6 +69,9 @@ class ExecAntcloudMarketingagentCreativeChatRequest extends Model {
                     $res['extra_params'][$n++] = null !== $item ? $item->toMap() : $item;
                 }
             }
+        }
+        if (null !== $this->productCode) {
+            $res['product_code'] = $this->productCode;
         }
         return $res;
     }
@@ -118,6 +122,9 @@ class ExecAntcloudMarketingagentCreativeChatRequest extends Model {
                     $model->extraParams[$n++] = null !== $item ? MapStruct::fromMap($item) : $item;
                 }
             }
+        }
+        if(isset($map['product_code'])){
+            $model->productCode = $map['product_code'];
         }
         return $model;
     }
@@ -180,5 +187,11 @@ class ExecAntcloudMarketingagentCreativeChatRequest extends Model {
      * @var MapStruct[]
      */
     public $extraParams;
+
+    // 产品码
+    /**
+     * @var string
+     */
+    public $productCode;
 
 }
